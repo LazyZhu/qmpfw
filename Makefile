@@ -19,9 +19,11 @@
 OWRT_SVN = svn://svn.openwrt.org/openwrt/branches/backfire
 OWRT_SVN_REV = 27617
 QMP_GIT = git://qmp.cat/qmp.git
+QMP_GIT_TGZ = http://qmp.cat/gitrevision_download?project_id=5
 QMP_GIT_TAG = ratafia-rc1
 EIGENNET_GIT = git://gitorious.org/eigennet/packages.git
 EIGENNET_GIT_REV = 7467D68855991FE35797B0A5958B000F65C0134F
+EIGENNET_GIT_TGZ = http://gitorious.org/eigennet/packages/archive-tarball
 #B6M_GIT = git://qmp.cat/b6m.git
 #B6M_GIT_BRANCH = openwrt
 BUILD_DIR = build
@@ -113,13 +115,18 @@ define target_error
 endef
 
 .checkout_qmp:
-	git clone $(QMP_GIT) $(BUILD_DIR)/qmp
-	cd $(BUILD_DIR)/qmp; git checkout $(QMP_GIT_TAG); cd ..
+	@echo "Get quick-mesh-project-$(QMP_GIT_TAG).tgz"
+	mkdir -p $(BUILD_DIR)
+	wget -c -q -O - "$(QMP_GIT_TGZ)&rev=$(QMP_GIT_TAG)" | tar zxvf - 
+	mv quick-mesh-project-$(QMP_GIT_TAG) $(BUILD_DIR)/qmp
 	@touch $@
 
 .checkout_eig:
-	git clone $(EIGENNET_GIT) $(BUILD_DIR)/eigennet/packages
-	cd $(BUILD_DIR)/eigennet/packages && git reset --hard $(EIGENNET_GIT_REV)
+	@echo "Get eigennet, niit and olsr-eigennet. "
+	mkdir -p $(BUILD_DIR)
+	cd $(BUILD_DIR)
+	wget -c -q -O - "$(EIGENNET_GIT_TGZ)/$(EIGENNET_GIT_REV)" |tar zxvf -
+	mv eigennet-packages $(BUILD_DIR)/eigennet
 	@touch $@
 
 .checkout_b6m:
