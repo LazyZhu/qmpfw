@@ -123,10 +123,9 @@ endef
 
 .checkout_eig:
 	@echo "Get eigennet, niit and olsr-eigennet. "
-	mkdir -p $(BUILD_DIR)
-	cd $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/eigennet
 	wget -c -q -O - "$(EIGENNET_GIT_TGZ)/$(EIGENNET_GIT_REV)" |tar zxvf -
-	mv eigennet-packages $(BUILD_DIR)/eigennet
+	mv eigennet-packages $(BUILD_DIR)/eigennet/packages
 	@touch $@
 
 .checkout_b6m:
@@ -143,7 +142,7 @@ checkout: .checkout_qmp .checkout_eig
 	
 update: .checkout_eig .checkout_qmp
 # update: .checkout_eig .checkout_qmp .checkout_b6m
-	cd $(BUILD_DIR)/qmp && git pull
+#	cd $(BUILD_DIR)/qmp && git pull
 #	cd $(BUILD_DIR)/eigennet/packages && git pull
 
 update_all: update
