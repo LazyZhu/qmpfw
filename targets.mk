@@ -29,6 +29,17 @@ ifeq ($(T),ar71xx)
   PROFILE:=ath-qmp-tiny-node
 endif
 
+ifeq ($(T),ath-ib)
+  NAME:=ar71xx
+  ARCH:=ar71xx
+  TBUILD:=ar71xx
+  PROFILE:=ath-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2
+endif
+
+
+
 ifeq ($(T),alix)
   NAME:=Alix
   ARCH:=x86

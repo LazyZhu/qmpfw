@@ -1,0 +1,16 @@
+CONFIG_TARGET_ar71xx=y
+CONFIG_TARGET_ar71xx_generic=y
+CONFIG_TARGET_ar71xx_generic_Default=y
+CONFIG_ALL=y
+CONFIG_IB=y
+# CONFIG_PACKAGE_axel is not set
+# CONFIG_PACKAGE_axtlswrap is not set
+# CONFIG_PACKAGE_classpath-tools is not set
+# CONFIG_PACKAGE_firmwarehotplug is not set
+CONFIG_PACKAGE_kmod-usb-ohci=m
+CONFIG_PACKAGE_kmod-usb2=m
+# CONFIG_PACKAGE_libgsl is not set
+CONFIG_PACKAGE_kmod-ath5k=y
+CONFIG_PACKAGE_kmod-ath9k=y
+CONFIG_ATH_USER_REGD=y
+
