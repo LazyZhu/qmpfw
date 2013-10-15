@@ -94,7 +94,7 @@ endef
 define copy_config
 	@echo "Using profile $(PROFILE)"
 	cp -f $(CONFIG_DIR)/$(PROFILE) $(CONFIG) || echo "WARNING: Config file not found!"
-	[ -f $(CONFIG_DIR)/targets/$(TARGET) ] && cat $(CONFIG_DIR)/targets/$(TARGET) >> $(CONFIG) || true
+	-[ -f $(CONFIG_DIR)/targets/$(TARGET) ] && cat $(CONFIG_DIR)/targets/$(TARGET) >> $(CONFIG)
 	cd $(BUILD_PATH) && make defconfig
 endef
 
@@ -104,13 +104,13 @@ define copy_config_obsolete
 	cd $(BUILD_PATH) && ./scripts/diffconfig.sh > .config.tmp
 	cp -f $(BUILD_PATH)/.config.tmp $(BUILD_PATH)/.config
 	cd $(BUILD_PATH) && make defconfig
-	[ -f $(CONFIG_DIR)/$(TARGET_CONFIGS)/kernel_config ] && cat $(CONFIG_DIR)/$(TARGET_CONFIGS)/kernel_config >> $(CONFIG) || true
+	-[ -f $(CONFIG_DIR)/$(TARGET_CONFIGS)/kernel_config ] && cat $(CONFIG_DIR)/$(TARGET_CONFIGS)/kernel_config >> $(CONFIG)
 endef
 
 define copy_myconfig
 	@echo "Syncronizing configuration from previous one"
 	@cp -f $(MY_CONFIGS)/$(TARGET_CONFIGS)/config $(CONFIG) || echo "WARNING: Config file not found in $(MY_CONFIGS)!"
-	@[ -f $(MY_CONFIGS)/$(TARGET_CONFIGS)/kernel_config ] && cat $(MY_CONFIGS)/$(TARGET_CONFIGS)/kernel_config >> $(CONFIG) || true
+	-@[ -f $(MY_CONFIGS)/$(TARGET_CONFIGS)/kernel_config ] && cat $(MY_CONFIGS)/$(TARGET_CONFIGS)/kernel_config >> $(CONFIG)
 endef
 
 define update_feeds
@@ -145,10 +145,10 @@ define post_build
 	$(eval SIM_NAME=$(NAME)-$(COMMUNITY)_$(BRANCH_GIT)-sysupgrade-$(TIMESTAMP).bin)
 	$(eval COMP=$(shell ls $(BUILD_PATH)/$(IMAGE_PATH) 2>/dev/null | grep -c \\.gz))
 	mkdir -p $(IMAGES)
-	@[ $(COMP) -eq 1 ] && gunzip $(BUILD_PATH)/$(IMAGE_PATH) -c > $(IMAGES)/$(IM_NAME) || true
-	@[ $(COMP) -ne 1 -a -f $(BUILD_PATH)/$(IMAGE_PATH) ] && cp -f $(BUILD_PATH)/$(IMAGE_PATH) $(IMAGES)/$(IM_NAME) || true
-	@[ $(COMP) -eq 1 -a -n "$(SYSUPGRADE)" ] && gunzip $(BUILD_PATH)/$(SIMAGE_PATH) -c > $(IMAGES)/$(SIM_NAME) || true
-	@[ $(COMP) -ne 1 -a -n "$(SYSUPGRADE)" ] && cp -f $(BUILD_PATH)/$(SIMAGE_PATH) $(IMAGES)/$(SIM_NAME) || true
+	-@[ $(COMP) -eq 1 ] && gunzip $(BUILD_PATH)/$(IMAGE_PATH) -c > $(IMAGES)/$(IM_NAME)
+	-@[ $(COMP) -ne 1 -a -f $(BUILD_PATH)/$(IMAGE_PATH) ] && cp -f $(BUILD_PATH)/$(IMAGE_PATH) $(IMAGES)/$(IM_NAME)
+	-@[ $(COMP) -eq 1 -a -n "$(SYSUPGRADE)" ] && gunzip $(BUILD_PATH)/$(SIMAGE_PATH) -c > $(IMAGES)/$(SIM_NAME)
+	-@[ $(COMP) -ne 1 -a -n "$(SYSUPGRADE)" ] && cp -f $(BUILD_PATH)/$(SIMAGE_PATH) $(IMAGES)/$(SIM_NAME)
 	@[ -f $(IMAGES)/$(IM_NAME) ] || echo No output image configured in targets.mk
 	@echo $(IM_NAME)
 	$(if $(SYSUPGRADE),@echo $(SIM_NAME))
@@ -163,9 +163,9 @@ define clean_all
 endef
 
 define clean_target
-	rm -rf $(BUILD_PATH) || true
-	rm -f .checkout_$(TBUILD) || true
-	rm -rf $(BUILD_DIR)/packages.$(TARGET) || true
+	-rm -rf $(BUILD_PATH)
+	-rm -f .checkout_$(TBUILD)
+	-rm -rf $(BUILD_DIR)/packages.$(TARGET)
 	rm -f .checkout_owrt_pkg_override_$(TARGET)
 endef
 
@@ -191,7 +191,7 @@ endef
 all: build
 
 .checkout_qmp:
-	@[ "$(DEV)" == "1" ] && echo "Using developer enviroment" || true
+	-@[ "$(DEV)" == "1" ] && echo "Using developer enviroment"
 	git clone $(QMP_GIT) $(BUILD_DIR)/qmp
 	cd $(BUILD_DIR)/qmp; git checkout $(QMP_GIT_BRANCH); cd ..
 	@touch $@
@@ -261,7 +261,7 @@ config:
 	mv .config.tmp .config
 
 help:
-	cat README | more || true
+	-cat README | more
 
 build: checkout sync_config
 	$(call pre_build)
