@@ -53,9 +53,11 @@ $(eval $(if $(TARGET),,TARGET=$(T)))
 $(eval $(if $(TBUILD),,TBUILD=$(TARGET)))
 BUILD_PATH=$(BUILD_DIR)/$(TBUILD)
 
-#Getting output image paths
-IMAGE_PATH = $(IMAGE)
-SIMAGE_PATH = $(SYSUPGRADE)
+#Getting output image paths and names
+IMAGE_PATH = $(shell echo "$(IMAGE)" | cut -d " " -f1)
+IM_NAME= $(shell echo "$(IMAGE)" | cut -d " " -f2)
+SIMAGE_PATH = $(shell echo "$(SYSUPGRADE)" | cut -d " " -f1)
+SIM_NAME = $(shell echo "$(SYSUPGRADE)" | cut -d " " -f2)
 
 CONFIG = $(BUILD_PATH)/.config
 KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
@@ -141,8 +143,8 @@ endef
 
 define post_build
 	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
-	$(eval IM_NAME=$(NAME)-$(COMMUNITY)_$(BRANCH_GIT)-factory-$(TIMESTAMP).bin)
-	$(eval SIM_NAME=$(NAME)-$(COMMUNITY)_$(BRANCH_GIT)-sysupgrade-$(TIMESTAMP).bin)
+	$(if $(IM_NAME),,$(eval IM_NAME=$(NAME)-$(COMMUNITY)_$(BRANCH_GIT)-factory-$(TIMESTAMP).bin))
+	$(if $(SIM_NAM),,$(eval SIM_NAME=$(NAME)-$(COMMUNITY)_$(BRANCH_GIT)-sysupgrade-$(TIMESTAMP).bin))
 	$(eval COMP=$(shell ls $(BUILD_PATH)/$(IMAGE_PATH) 2>/dev/null | grep -c \\.gz))
 	mkdir -p $(IMAGES)
 	@[ $(COMP) -eq 1 ] && gunzip $(BUILD_PATH)/$(IMAGE_PATH) -c > $(IMAGES)/$(IM_NAME) || true

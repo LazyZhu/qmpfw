@@ -35,10 +35,8 @@ ifeq ($(T),ath-ib)
   TBUILD:=ar71xx
   PROFILE:=ath-imagebuilder
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2
+  IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImabeBuilder-qMp-ar71xx-x86_64.tar.bz2
 endif
-
-
 
 ifeq ($(T),alix)
   NAME:=Alix
