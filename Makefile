@@ -54,10 +54,10 @@ $(eval $(if $(TBUILD),,TBUILD=$(TARGET)))
 BUILD_PATH=$(BUILD_DIR)/$(TBUILD)
 
 #Getting output image paths and names
-IMAGE_PATH = $(shell echo "$(IMAGE)" | cut -d " " -f1)
-IM_NAME= $(shell echo "$(IMAGE)" | cut -d " " -f2)
-SIMAGE_PATH = $(shell echo "$(SYSUPGRADE)" | cut -d " " -f1)
-SIM_NAME = $(shell echo "$(SYSUPGRADE)" | cut -d " " -f2)
+IMAGE_PATH := $(shell echo $(IMAGE) | awk  '{print $$1}')
+IM_NAME := $(shell echo $(IMAGE) | awk '{print $$2}')
+SIMAGE_PATH := $(shell echo $(SYSUPGRADE) | awk '{print $$1}')
+SIM_NAME := $(shell echo $(SYSUPGRADE) | awk '{print $$2}')
 
 CONFIG = $(BUILD_PATH)/.config
 KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
