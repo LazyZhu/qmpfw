@@ -21,6 +21,10 @@ TARGETS=${TARGETS:-$(make list_targets)}
 # Targets which are not gonna be compiled
 NOTARGETS=${NOTARGETS:-}
 
+# Extra packages (separated by spaces)
+EXTRA_PACKS=${EXTRA_PACKS:-}
+
+
 # If FORCE is 1, compilation process will be forced
 [ -z "$FORCE" ] && FORCE=0
 
@@ -39,7 +43,7 @@ make update_all
 for t in $TARGETS; do
 	[[ "$NOTARGETS" =~ "$t" ]] && continue
 	echo "Compiling target $t"
-	nice -n 25 make T=$t build J=2 QMP_GIT_BRANCH=$BRANCH COMMUNITY=$COMMUNITY
+	nice -n 25 make T=$t build J=2 QMP_GIT_BRANCH=$BRANCH COMMUNITY=$COMMUNITY EXTRA_PACKS=$EXTRA_PACKS
 
 	[ $? -ne 0 ] && [ ! -z "$MAIL" ] && 
 	  echo "Error detected during QMP compilation process" | mail -s "[qMp] build system" $MAIL

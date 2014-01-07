@@ -30,8 +30,9 @@ MY_CONFIGS = $(BUILD_DIR)/configs
 IMAGES = images
 SHELL = bash
 QMP_FEED = package/feeds/qmp_packages
-COMMUNITY ?= qMp
 SCRIPTS_DIR= scripts
+COMMUNITY ?= qMp
+EXTRA_PACKS =
 J ?= 1
 V ?= 0
 T =
@@ -138,7 +139,7 @@ define kmenuconfig_owrt
 endef
 
 define pre_build
-	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) PRE_BUILD $(TBUILD) $(TARGET)) )
+	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) PRE_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKS)) )
 endef
 
 define post_build
@@ -154,7 +155,7 @@ define post_build
 	@[ -f $(IMAGES)/$(IM_NAME) ] || echo No output image configured in targets.mk
 	@echo $(IM_NAME)
 	$(if $(SYSUPGRADE),@echo $(SIM_NAME))
-	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) POST_BUILD $(TBUILD) $(TARGET)) )
+	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) POST_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKS)) )
 	@echo "qMp firmware compiled, you can find output files in $(IMAGES) directory."
 endef
 

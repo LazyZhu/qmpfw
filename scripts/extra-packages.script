@@ -1,0 +1,16 @@
+#!/bin/bash
+
+PREPOST="$1"
+shift
+TBUILD="$1"
+shift
+shift
+EXTRA_PACKS="$@"
+FILE="build/$TBUILD/.config"
+[ -z "$TBUILD" ] || [ ! -d "build/$TBUILD" ] || [ -f "$FILE" ] && exit 1
+
+for i in $EXTRA_PACKS; do
+	[ "$PREPOST" = "PRE_BUILD" ] && AUX=$(grep $i $FILE) && sed -i -e s/"$AUX"/"CONFIG_PACKAGE_$i=y"/g $FILE	
+	[ "$PREPOST" = "POST_BUILD" ] && AUX=$(grep $i $FILE) && sed -i -e s/"$AUX"/"# CONFIG_PACKAGE_$i is not set"/g $FILE	
+done
+
