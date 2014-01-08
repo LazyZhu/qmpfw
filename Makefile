@@ -266,10 +266,16 @@ config:
 help:
 	-cat README | more
 
-build: checkout sync_config
+prebuild:
 	$(call pre_build)
-	$(if $(TARGET),$(call build_src))
+
+postbuild:
 	$(call post_build)
+
+srcbuild:
+	$(if $(TARGET),$(call build_src))
+
+build: checkout sync_config prebuild srcbuild postbuild
 
 is_up_to_date:
 	cd $(BUILD_DIR)/qmp && test "$$($(call get_git_local_revision,$(QMP_GIT_BRANCH)))" == "$$($(call get_git_remote_revision,$(QMP_GIT_BRANCH)))"
