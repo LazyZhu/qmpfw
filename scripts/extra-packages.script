@@ -13,8 +13,8 @@ FILE="build/${TBUILD}/.config"
 for i in $EXTRA_PACKS; do
 	AUX="$(grep $i $FILE)"
 	[ ! -z "$AUX" ] && {
-		[ "$PREPOST" = "PRE_BUILD" ] && echo "- (PRE_BUILD) Adding extra package: $i" >&2 && sed -i -e s/"${AUX}"/"CONFIG_PACKAGE_$i=y"/g $FILE 
-		[ "$PREPOST" = "POST_BUILD" ] && echo "- (POST_BUILD) Removing extra package: $1" >&2 && sed -i -e s/"${AUX}"/"# CONFIG_PACKAGE_$i is not set"/g $FILE
+		[ "$PREPOST" = "PRE_BUILD" ] && echo "- Adding extra package: $i" >&2 && sed -i -e s/"${AUX}"/"CONFIG_PACKAGE_$i=y"/g $FILE 
+		[ "$PREPOST" = "POST_BUILD" ] && echo "- Removing extra package: $1" >&2 && sed -i -e s/"${AUX}"/"# CONFIG_PACKAGE_$i is not set"/g $FILE
 	}	
 done
 

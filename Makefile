@@ -63,7 +63,7 @@ SIM_NAME := $(shell echo $(SYSUPGRADE) | awk '{print $$2}')
 CONFIG = $(BUILD_PATH)/.config
 KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
 
-.PHONY: checkout update clean config menuconfig kernel_menuconfig list_targets build clean_qmp
+.PHONY: checkout update clean config menuconfig kernel_menuconfig list_targets pre_build compile post_build clean_qmp
 
 
 define build_src
@@ -139,6 +139,7 @@ define kmenuconfig_owrt
 endef
 
 define pre_build
+	@echo "Executing PRE_BUILD scripts"
 	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) PRE_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKS)) )
 endef
 
@@ -155,6 +156,7 @@ define post_build
 	@[ -f $(IMAGES)/$(IM_NAME) ] || echo No output image configured in targets.mk
 	@echo $(IM_NAME)
 	$(if $(SYSUPGRADE),@echo $(SIM_NAME))
+	@echo "Executing POST_BUILD scripts"
 	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) POST_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKS)) )
 	@echo "qMp firmware compiled, you can find output files in $(IMAGES) directory."
 endef
@@ -255,6 +257,10 @@ post_build: checkout
 pre_build: checkout
 	$(call pre_build)
 
+compile: checkout
+	$(if $(TARGET),$(call build_src))
+
+
 list_targets:
 	$(info $(HW_AVAILABLE))
 	@exit 0
@@ -266,16 +272,7 @@ config:
 help:
 	-cat README | more
 
-prebuild:
-	$(call pre_build)
-
-postbuild:
-	$(call post_build)
-
-srcbuild:
-	$(if $(TARGET),$(call build_src))
-
-build: checkout sync_config prebuild srcbuild postbuild
+build: checkout sync_config pre_build compile post_build
 
 is_up_to_date:
 	cd $(BUILD_DIR)/qmp && test "$$($(call get_git_local_revision,$(QMP_GIT_BRANCH)))" == "$$($(call get_git_remote_revision,$(QMP_GIT_BRANCH)))"
