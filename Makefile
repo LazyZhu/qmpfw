@@ -164,7 +164,7 @@ endef
 define clean_all
 	rm -rf $(BUILD_DIR)/*
 	rm -f .checkout_*
-	rm -f $(IMAGES)/*
+	rm -f $(IMAGES)/*.bin $(IMAGES)/IMAGES
 endef
 
 define clean_target
