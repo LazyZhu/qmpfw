@@ -59,7 +59,6 @@ for t in $TARGETS; do
 	[ $? -ne 0 ] && [ ! -z "$MAIL" ] && echo "Error detected during QMP compilation process (for target $t)" | mail -s "[qMp] build system" $MAIL && ./scripts/extra-packages.script POST_BUILD "ar71xx" $t $EXTRA_PACKS
 done
 
-exit 0
 [ $DAYS_TO_PRESERVE -gt 0 ] && find images/ -iname "*.bin" -type f -mtime +$DAYS_TO_PRESERVE -exec rm -f '{}' \;
 
 (cd images && md5sum *.bin > IMAGES)
