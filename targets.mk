@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx alix bullet nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-841 tl-wr841n-v8 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 vbox vmware wpe72
+HW_AVAILABLE := ar71xx alix bullet nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 vbox vmware wpe72
 TBUILD_LIST := ar71xx
 
 ifeq ($(T),ar71xx)
@@ -119,8 +119,8 @@ ifeq ($(T),tl-2543)
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr2543-v1-squashfs-sysupgrade.bin
 endif
 
-ifeq ($(T),tl-841)
-  NAME:=Tplink841
+ifeq ($(T),tl-wr841n-v7)
+  NAME:=TP-Link-TL-WR841N-v7
   ARCH:=ar71xx
   TBUILD:=ar71xx
   PROFILE:=ath-qmp-tiny-node
