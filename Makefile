@@ -23,15 +23,16 @@ OWRT_SVN = svn://svn.openwrt.org/openwrt/branches/attitude_adjustment
 OWRT_PKG_SVN =  svn://svn.openwrt.org/openwrt/branches/packages_12.09
 QMP_GIT_RW = ssh://gitosis@qmp.cat:221/qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
-QMP_GIT_BRANCH ?= master
+QMP_GIT_BRANCH ?= testing
 BUILD_DIR = build
 CONFIG_DIR = configs
 MY_CONFIGS = $(BUILD_DIR)/configs
 IMAGES = images
 SHELL = bash
 QMP_FEED = package/feeds/qmp_packages
-COMMUNITY ?= qMp
 SCRIPTS_DIR= scripts
+COMMUNITY ?= qMp
+EXTRA_PACKS =
 J ?= 1
 V ?= 0
 T =
@@ -62,7 +63,7 @@ SIM_NAME := $(shell echo $(SYSUPGRADE) | awk '{print $$2}')
 CONFIG = $(BUILD_PATH)/.config
 KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
 
-.PHONY: checkout update clean config menuconfig kernel_menuconfig list_targets build clean_qmp
+.PHONY: checkout update clean config menuconfig kernel_menuconfig list_targets pre_build compile post_build clean_qmp
 
 
 define build_src
@@ -138,7 +139,8 @@ define kmenuconfig_owrt
 endef
 
 define pre_build
-	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) PRE_BUILD $(TBUILD) $(TARGET)) )
+	@echo "Executing PRE_BUILD scripts"
+	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) PRE_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKS)) )
 endef
 
 define post_build
@@ -154,14 +156,15 @@ define post_build
 	@[ -f $(IMAGES)/$(IM_NAME) ] || echo No output image configured in targets.mk
 	@echo $(IM_NAME)
 	$(if $(SYSUPGRADE),@echo $(SIM_NAME))
-	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) POST_BUILD $(TBUILD) $(TARGET)) )
+	@echo "Executing POST_BUILD scripts"
+	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) POST_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKS)) )
 	@echo "qMp firmware compiled, you can find output files in $(IMAGES) directory."
 endef
 
 define clean_all
 	rm -rf $(BUILD_DIR)/*
 	rm -f .checkout_*
-	rm -f $(IMAGES)/*
+	rm -f $(IMAGES)/*.bin $(IMAGES)/IMAGES
 endef
 
 define clean_target
@@ -254,8 +257,16 @@ post_build: checkout
 pre_build: checkout
 	$(call pre_build)
 
+compile: checkout
+	$(if $(TARGET),$(call build_src))
+
+
 list_targets:
 	$(info $(HW_AVAILABLE))
+	@exit 0
+
+target_name:
+	$(info $(NAME))
 	@exit 0
 
 config:
@@ -265,10 +276,7 @@ config:
 help:
 	-cat README | more
 
-build: checkout sync_config
-	$(call pre_build)
-	$(if $(TARGET),$(call build_src))
-	$(call post_build)
+build: checkout sync_config pre_build compile post_build
 
 is_up_to_date:
 	cd $(BUILD_DIR)/qmp && test "$$($(call get_git_local_revision,$(QMP_GIT_BRANCH)))" == "$$($(call get_git_remote_revision,$(QMP_GIT_BRANCH)))"
