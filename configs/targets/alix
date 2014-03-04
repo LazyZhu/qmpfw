@@ -1,0 +1,2 @@
+CONFIG_TARGET_x86_alix2=y
+CONFIG_TARGET_x86_alix2_Default=y

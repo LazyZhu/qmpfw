@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx alix bullet nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-841 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 vbox vmware wpe72
+HW_AVAILABLE := ar71xx bullet nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-841 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 alix x86 vbox vmware wpe72 ath-ib
 TBUILD_LIST := ar71xx
 
 ifeq ($(T),ar71xx)
@@ -46,6 +46,16 @@ ifeq ($(T),alix)
   IMAGE:=bin/$(ARCH)/openwrt-x86-alix2-combined-squashfs.img
   SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-alix2-combined-squashfs.img
 endif
+
+ifeq ($(T),x86)
+  NAME:=x86
+  ARCH:=x86
+  TBUILD:=ar71xx
+  PROFILE:=x86-qmp-big-node
+  IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-squashfs.img
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-squashfs.img
+endif
+
 
 ifeq ($(T),bullet)
   NAME:=Bullet
