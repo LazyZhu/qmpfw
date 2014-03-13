@@ -159,7 +159,7 @@ endif
 ifeq ($(T),tl-703n)
   NAME:=Tplink703n
   ARCH:=ar71xx
-  TBUILD:=ar71xx
+  TBUILD:=openwrt
   PROFILE:=ath-qmp-tiny-node
   IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr703n-v1-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr703n-v1-squashfs-sysupgrade.bin
