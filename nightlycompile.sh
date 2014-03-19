@@ -14,7 +14,7 @@ MAIL="admin@qmp.cat"
 DAYS_TO_PRESERVE="10"
 
 COMMUNITY=${COMMUNITY:-qMp}
-BRANCH=${BRANCH:-testing}
+BRANCH=${BRANCH:-kalimotxo}
 
 # If target is not specified, compiling for all targets
 TARGETS=${TARGETS:-$(make list_targets)}
