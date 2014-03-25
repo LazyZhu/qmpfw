@@ -96,7 +96,7 @@ endef
 define copy_config
 	@echo "Using profile $(PROFILE)"
 	cp -f $(CONFIG_DIR)/$(PROFILE) $(CONFIG) || echo "WARNING: Config file not found!"
-	-[ -f $(CONFIG_DIR)/targets/$(TARGET) ] && cat $(CONFIG_DIR)/targets/$(TARGET) >> $(CONFIG)
+	-[ -f $(CONFIG_DIR)/targets/$(TARGET) ] && cat $(CONFIG_DIR)/targets/$(TARGET) >> $(CONFIG) || true
 	cd $(BUILD_PATH) && make defconfig
 endef
 
