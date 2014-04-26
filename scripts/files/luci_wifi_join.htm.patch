@@ -1,0 +1,35 @@
+--- feeds/luci/modules/admin-full/luasrc/view/admin_network/wifi_join.htm.orig	2014-04-21 21:47:03.005709811 +0200
++++ feeds/luci/modules/admin-full/luasrc/view/admin_network/wifi_join.htm	2014-04-26 17:38:51.467465013 +0200
+@@ -77,15 +77,28 @@
+ 
+ 
+ 	function scanlist(times)
+-		local i, k, v
++		local i, k, v, old
+ 		local l = { }
+-		local s = { }
++		local new = { }
++		local networks = { }
++		local found = false
+ 
+ 		for i = 1, times do
+ 			for k, v in ipairs(iw.scanlist or { }) do
+-				if not s[v.bssid] then
++			        new['bssid'] = v.bssid
++			        new['channel'] = v.channel
++				found = false
++				for _, old in ipairs(networks) do
++					if old.bssid == new.bssid and old.channel == new.channel then
++						found = true
++						break
++					end
++				end
++				if not found then
+ 					l[#l+1] = v
+-					s[v.bssid] = true
++					networks[#networks+1] = { }
++					networks[#networks]['bssid'] = new.bssid
++					networks[#networks]['channel'] = new.channel
+ 				end
+ 			end
+ 		end
