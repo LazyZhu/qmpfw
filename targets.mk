@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx bullet nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 wpe72 dragino2 alix x86 vbox vmware ath-ib
+HW_AVAILABLE := ar71xx bullet nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 wpe72 dragino2 alix x86 vbox vmware ath-ib
 TBUILD_LIST := openwrt
 
 ifeq ($(T),ar71xx)
@@ -145,6 +145,15 @@ ifeq ($(T),tl-wr841n-v8)
   PROFILE:=ath-qmp-tiny-node
   IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),tl-wr841n-v9)
+  NAME:=TP-Link-TL-WR841N-v9
+  ARCH:=ar71xx
+  TBUILD:=openwrt
+  PROFILE:=ath-qmp-tiny-node
+  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v9-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v9-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-842)
