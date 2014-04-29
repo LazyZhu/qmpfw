@@ -251,8 +251,7 @@ ifeq ($(T),vbox)
   ARCH:=x86
   TBUILD:=openwrt
   PROFILE:=vm-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.vdi
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.vdi
+  IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.img.gz
 endif
 
 ifeq ($(T),vmware)
