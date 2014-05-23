@@ -55,7 +55,7 @@ for t in $TARGETS; do
 	}
 
 	echo "Compiling target $t"
-	nice -n 25 make T=$t build J=2 QMP_GIT_BRANCH=$BRANCH COMMUNITY=$COMMUNITY EXTRA_PACKS=$EXTRA_PACKS
+	nice -n 25 make T=$t build J=1 QMP_GIT_BRANCH=$BRANCH COMMUNITY=$COMMUNITY EXTRA_PACKS=$EXTRA_PACKS
 	[ $? -ne 0 ] && [ ! -z "$MAIL" ] && echo "Error detected during QMP compilation process (for target $t)" | mail -s "[qMp] build system" $MAIL && ./scripts/extra-packages.script POST_BUILD "ar71xx" $t $EXTRA_PACKS
 done
 
