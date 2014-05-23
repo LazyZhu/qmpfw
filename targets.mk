@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx bullet nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 wpe72 dragino2 alix x86 vbox vmware ath-ib
+HW_AVAILABLE := ar71xx bullet nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 wpe72 dragino2 alix x86 vbox vmware wrtnode ath-ib
 TBUILD_LIST := openwrt
 
 ifeq ($(T),ar71xx)
@@ -262,3 +262,11 @@ ifeq ($(T),vmware)
   IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.vmdk
   SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.vmdk
 endif
+
+ifeq ($(T),wrtnode)
+ NAME:=WRTnode
+ ARCH:=ramips
+ TBUILD:=openwrt
+ IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620n-wrtnode-squashfs-sysupgrade.bin
+ SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620n-wrtnode-squashfs-sysupgrade.bin
+endif 
