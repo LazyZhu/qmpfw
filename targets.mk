@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx bullet nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 alix x86 vbox vmware wpe72 ath-ib
+HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 alix x86 vbox vmware wpe72 ath-ib
 TBUILD_LIST := ar71xx
 
 ifeq ($(T),ar71xx)
@@ -244,4 +244,12 @@ ifeq ($(T),vmware)
   PROFILE:=vm-qmp-big-node
   IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.vmdk
   SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.vmdk
+endif
+
+ifeq ($(T),kvm)
+  NAME:=KVM
+  ARCH:=x86
+  TBUILD:=ar71xx
+  PROFILE:=kvm-qmp-big-node
+  IMAGE:=bin/$(ARCH)/openwrt-x86-kvm_guest-combined-ext4.img.gz
 endif
