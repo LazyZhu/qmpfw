@@ -38,6 +38,8 @@ make is_up_to_date QMP_GIT_BRANCH=$BRANCH >& /dev/null
 # Date of the last commit
 LAST_COMMIT_DATE=$(cd build/qmp && git log -1 origin/${BRANCH} --format="%ct")
 
+# Number of parallel procs
+[ -z "$J" ] && J=$(cat /proc/cpuinfo | grep -c processor)
 
 (cd build/qmp && git checkout $BRANCH)
 
@@ -55,7 +57,7 @@ for t in $TARGETS; do
 	}
 
 	echo "Compiling target $t"
-	nice -n 25 make T=$t build J=2 QMP_GIT_BRANCH=$BRANCH COMMUNITY=$COMMUNITY EXTRA_PACKS=$EXTRA_PACKS
+	nice -n 25 make T=$t build J=$J QMP_GIT_BRANCH=$BRANCH COMMUNITY=$COMMUNITY EXTRA_PACKS=$EXTRA_PACKS
 	[ $? -ne 0 ] && [ ! -z "$MAIL" ] && echo "Error detected during QMP compilation process (for target $t)" | mail -s "[qMp] build system" $MAIL && ./scripts/extra-packages.script POST_BUILD "ar71xx" $t $EXTRA_PACKS
 done
 
