@@ -268,7 +268,6 @@ ifeq ($(T),wrtnode)
  ARCH:=ramips
  TBUILD:=openwrt
  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620n-wrtnode-squashfs-sysupgrade.bin
- SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620n-wrtnode-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),kvm)
