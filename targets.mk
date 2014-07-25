@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 nsm5-xw pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 wpe72 dragino2 alix x86 vbox vmware wrtnode ath-ib
+HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 nsm5-xw pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 wpe72 dragino2 alix x86 unifi-ap vbox vmware wrtnode ath-ib
 TBUILD_LIST := openwrt
 
 ifeq ($(T),ar71xx)
@@ -253,6 +253,15 @@ ifeq ($(T),dragino2)
   PROFILE:=ath-qmp-small-node
   IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-dragino2-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-dragino2-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),unifi-ap)
+  NAME:=Ubiquiti-Unifi-AP
+  ARCH:=ar71xx
+  TBUILD:=openwrt
+  PROFILE:=ath-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-unifi-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-unifi-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),vbox)
