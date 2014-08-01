@@ -19,7 +19,8 @@
 
 
 OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
-OWRT_PKG_SCM = git clone git://git.openwrt.org/packages.git
+OWRT_PKG_SCM = git clone https://github.com/openwrt/packages.git
+OWRT_OLDPKG_SCM = git clone http://git.openwrt.org/packages.git
 QMP_GIT_RW = ssh://gitosis@qmp.cat:221/qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
 QMP_GIT_BRANCH ?= kalimotxo
@@ -91,6 +92,11 @@ endef
 define checkout_owrt_pkg_override
 	$(OWRT_PKG_SCM) $(BUILD_DIR)/packages.$(TARGET)
 	sed -i -e "s|src-link packages .*|src-link packages `pwd`/$(BUILD_DIR)/packages.$(TARGET)|" $(BUILD_PATH)/feeds.conf
+endef
+
+define checkout_owrt_oldpkg_override
+	$(OWRT_OLDPKG_SCM) $(BUILD_DIR)/oldpackages.$(TARGET)
+	sed -i -e "s|src-link oldpackages .*|src-link oldpackages `pwd`/$(BUILD_DIR)/oldpackages.$(TARGET)|" $(BUILD_PATH)/feeds.conf
 endef
 
 define copy_config
@@ -170,7 +176,9 @@ define clean_target
 	-rm -rf $(BUILD_PATH)
 	-rm -f .checkout_$(TBUILD)
 	-rm -rf $(BUILD_DIR)/packages.$(TARGET)
+	-rm -rf $(BUILD_DIR)/oldpackages.$(TARGET)
 	rm -f .checkout_owrt_pkg_override_$(TARGET)
+	rm -f .checkout_owrt_oldpkg_override_$(TARGET)
 endef
 
 define clean_pkg
@@ -204,15 +212,23 @@ all: build
 	$(OWRT_PKG_SCM) $(BUILD_DIR)/packages
 	@touch $@
 
+.checkout_owrt_oldpkg:
+	$(OWRT_OLDPKG_SCM) $(BUILD_DIR)/oldpackages
+	@touch $@
+
 .checkout_owrt_pkg_override:
 	$(if $(filter $(origin OWRT_PKG_SCM),override),$(if $(wildcard .checkout_owrt_pkg_override_$(TARGET)),,$(call checkout_owrt_pkg_override)),)
 	@touch .checkout_owrt_pkg_override_$(TARGET)
+
+.checkout_owrt_oldpkg_override:
+	$(if $(filter $(origin OWRT_OLDPKG_SCM),override),$(if $(wildcard .checkout_owrt_oldpkg_override_$(TARGET)),,$(call checkout_owrt_oldpkg_override)),)
+	@touch .checkout_owrt_oldpkg_override_$(TARGET)
 
 .checkout_owrt:
 	$(if $(TBUILD),,$(call target_error))
 	$(if $(wildcard .checkout_$(TBUILD)),,$(call checkout_src))
 
-checkout: .checkout_qmp .checkout_owrt .checkout_owrt_pkg .checkout_owrt_pkg_override
+checkout: .checkout_qmp .checkout_owrt .checkout_owrt_pkg .checkout_owrt_pkg_override .checkout_owrt_oldpkg .checkout_owrt_oldpkg_override
 	$(if $(wildcard .checkout_$(TBUILD)),,$(call update_feeds,$(TBUILD)))
 	$(if $(wildcard .checkout_$(TBUILD)),,$(call copy_config))
 	@touch .checkout_$(TBUILD)
@@ -221,12 +237,12 @@ sync_config:
 	$(if $(TARGET),,$(call target_error))
 	$(if $(wildcard $(MY_CONFIGS)/$(TARGET_CONFIGS)), $(call copy_myconfig),$(call copy_config))
 
-update: .checkout_owrt_pkg .checkout_owrt_pkg_override .checkout_qmp
+update: .checkout_owrt_pkg .checkout_owrt_pkg_override .checkout_owrt_oldpkg .checkout_owrt_oldpkg_override .checkout_qmp
 	$(if $(TBUILD),,$(call target_error))
 	cd $(BUILD_DIR)/qmp && git pull
 	$(call copy_feeds_file)
 
-update_all: .checkout_owrt_pkg .checkout_owrt_pkg_override .checkout_qmp
+update_all: .checkout_owrt_pkg .checkout_owrt_pkg_override .checkout_owrt_oldpkg .checkout_owrt_oldpkg_override .checkout_qmp
 	@echo Updating qMp repository
 	cd $(BUILD_DIR)/qmp && git pull
 	@echo Updating feeds config files
