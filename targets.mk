@@ -238,6 +238,24 @@ ifeq ($(T),tl-wdr4300)
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wdr4300-v1-squashfs-sysupgrade.bin
 endif
 
+ifeq ($(T),tl-wr743nd)
+  NAME:=Tplink743nd
+  ARCH:=ar71xx
+  TBUILD:=openwrt
+  PROFILE:=ath-qmp-tiny-node
+  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr743nd-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr743nd-v1-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),tl-wr740n)
+  NAME:=Tplink740n
+  ARCH:=ar71xx
+  TBUILD:=openwrt
+  PROFILE:=ath-qmp-tiny-node
+  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr740n-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr740n-v1-squashfs-sysupgrade.bin
+endif
+
 ifeq ($(T),wpe72)
   NAME:=CompexWPE72
   ARCH:=ar71xx
