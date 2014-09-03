@@ -18,7 +18,7 @@
 #    Contributors: Pau Escrich <p4u@dabax.net>, Simó Albert i Beltran, Agustí Moll
 
 
-OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
+OWRT_SCM = git clone git://git.openwrt.org/14.07/openwrt.git
 OWRT_PKG_SCM = git clone https://github.com/openwrt/packages.git
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
