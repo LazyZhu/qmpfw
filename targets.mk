@@ -309,7 +309,7 @@ endif
 ifeq ($(T),kvm)
   NAME:=KVM
   ARCH:=x86
-  TBUILD:=ar71xx
+  TBUILD:=openwrt
   PROFILE:=kvm-qmp-big-node
   IMAGE:=bin/$(ARCH)/openwrt-x86-kvm_guest-combined-ext4.img.gz
 endif
