@@ -1,5 +1,5 @@
---- a/drivers/net/wireless/ath/regd.c	2014-07-03 17:53:28.000000000 +0200
-+++ b/drivers/net/wireless/ath/regd.c	2014-07-03 17:52:53.000000000 +0200
+--- a/drivers/net/wireless/ath/regd.c	2014-09-04 14:06:38.000000000 +0200
++++ b/drivers/net/wireless/ath/regd.c	2014-09-04 14:06:50.000000000 +0200
 @@ -80,9 +80,8 @@
  static const struct ieee80211_regdomain ath_world_regdom_63_65 = {
  	.alpha2 =  "99",
