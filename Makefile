@@ -19,10 +19,10 @@
 
 
 OWRT_SCM = git clone git://git.openwrt.org/14.07/openwrt.git
-OWRT_PKG_SCM = git clone https://github.com/openwrt/packages.git
+OWRT_PKG_SCM = git clone -b for-14.07 https://github.com/openwrt/packages.git
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
-QMP_GIT_BRANCH ?= kalimotxo
+QMP_GIT_BRANCH ?= testing
 BUILD_DIR = build
 CONFIG_DIR = configs
 MY_CONFIGS = $(BUILD_DIR)/configs
