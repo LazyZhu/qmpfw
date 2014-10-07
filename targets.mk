@@ -251,7 +251,6 @@ ifeq ($(T),tl-wdr4900-v1)
   NAME:=TP-Link-TL-WDR4900-v1
   ARCH:=mpc85xx
   TBUILD:=openwrt
-  PROFILE:=ath-qmp-big-node
   IMAGE:=bin/$(ARCH)/openwrt-mpc85xx-generic-tl-wdr4900-v1-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-mpc85xx-generic-tl-wdr4900-v1-squashfs-sysupgrade.bin
 endif

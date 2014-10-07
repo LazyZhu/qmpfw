@@ -1,0 +1,4 @@
+CONFIG_TARGET_mpc85xx=y
+CONFIG_TARGET_mpc85xx_generic=y
+CONFIG_TARGET_mpc85xx_generic_TLWDR4900=y
+CONFIG_PACKAGE_qmp-big-node=y
