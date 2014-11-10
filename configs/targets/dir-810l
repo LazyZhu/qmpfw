@@ -1,4 +1,0 @@
-CONFIG_TARGET_ramips=y
-CONFIG_TARGET_ramips_mt7620a=y
-CONFIG_TARGET_ramips_mt7620a_Default=y
-CONFIG_PACKAGE_qmp-small-node=y
