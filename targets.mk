@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix x86 unifi-ap vbox vmware dir-810l wrtnode ath-ib
+HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix x86 unifi-ap vbox vmware dir-810l wrtnode ar71xx-ib atheros-ib mpc85xx-ib ramips-ib x86-ib
 TBUILD_LIST := openwrt
 
 ifeq ($(T),ar71xx)
@@ -27,15 +27,6 @@ ifeq ($(T),ar71xx)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-tiny-node
-endif
-
-ifeq ($(T),ath-ib)
-  NAME:=ar71xx
-  ARCH:=ar71xx
-  TBUILD:=openwrt
-  PROFILE:=ath-imagebuilder
-  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
 endif
 
 ifeq ($(T),alix)
@@ -55,7 +46,6 @@ ifeq ($(T),x86)
   IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-squashfs.img
   SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-squashfs.img
 endif
-
 
 ifeq ($(T),bullet)
   NAME:=Bullet
@@ -321,3 +311,49 @@ ifeq ($(T),kvm)
   PROFILE:=kvm-qmp-big-node
   IMAGE:=bin/$(ARCH)/openwrt-x86-kvm_guest-combined-ext4.img.gz
 endif
+
+ifeq ($(T),ar71xx-ib)
+  NAME:=ar71xx
+  ARCH:=ar71xx
+  TBUILD:=openwrt
+  PROFILE:=ar71xx-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+endif
+
+ifeq ($(T),atheros-ib)
+  NAME:=atheros
+  ARCH:=atheros
+  TBUILD:=openwrt
+  PROFILE:=atheros-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+endif
+
+ifeq ($(T),mpc85xx-ib)
+  NAME:=mpc85xx
+  ARCH:=mpc85xx
+  TBUILD:=openwrt
+  PROFILE:=mpc85xx-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+endif
+
+ifeq ($(T),ramips-ib)
+  NAME:=ramips
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=ramips-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+endif
+
+ifeq ($(T),x86-ib)
+  NAME:=x86
+  ARCH:=x86
+  TBUILD:=openwrt
+  PROFILE:=ath-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+endif
+
