@@ -316,6 +316,14 @@ ifeq ($(T),vmware)
   SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.vmdk
 endif
 
+ifeq ($(T),vocore)
+  NAME:=VoCore
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=rt5350-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-rt305x-vocore-squashfs-sysupgrade.bin
+endif 
+
 ifeq ($(T),wrtnode)
   NAME:=WRTnode
   ARCH:=ramips
