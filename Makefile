@@ -40,6 +40,10 @@ IMAGEOPT ?= true
 VERSIONOPT ?= true
 #VERSION_REPO ?= http://fw.qmp.cat/$(QMP_GIT_BRANCH)_openwrt-%T-generic/packages
 VERSION_REPO ?= http://fw.qmp.cat/trunk_openwrt-%T-generic/packages
+VERSION_DIST ?= qMp
+VERSION_NICK ?= Kalimotxo
+VERSION_CODE ?= Kalimotxo
+VERSION_NUMBER ?= trunk
 
 include targets.mk
 
@@ -72,7 +76,7 @@ KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
 define build_src
 	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
 	$(eval REV_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git --no-pager log -n 1 --oneline|cut -d " " -f 1))
-	make -C $(BUILD_PATH) $(MAKE_SRC) IMAGEOPT=$(IMAGEOPT) VERSIONOPT=$(VERSIONOPT) VERSION_REPO=$(VERSION_REPO) BRANCH_GIT=$(BRANCH_GIT) REV_GIT=$(REV_GIT)
+	make -C $(BUILD_PATH) $(MAKE_SRC) IMAGEOPT=$(IMAGEOPT) VERSIONOPT=$(VERSIONOPT) VERSION_REPO=$(VERSION_REPO) VERSION_DIST=$(VERSION_DIST) VERSION_NICK=$(VERSION_NICK) VERSION_NUMBER=$(VERSION_NUMBER) VERSION_CODE=$(VERSION_CODE) BRANCH_GIT=$(BRANCH_GIT) REV_GIT=$(REV_GIT)
 endef
 
 define copy_feeds_file
