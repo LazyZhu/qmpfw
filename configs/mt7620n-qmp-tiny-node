@@ -1,5 +1,5 @@
 CONFIG_TARGET_ramips=y
-CONFIG_TARGET_ramips_mt7620n=y
+CONFIG_TARGET_ramips_mt7620=y
 CONFIG_PACKAGE_qmp-tiny-node=y
 # CONFIG_PACKAGE_ppp is not set
 # CONFIG_PACKAGE_ppp-mod-pppoa is not set

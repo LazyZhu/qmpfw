@@ -328,7 +328,7 @@ ifeq ($(T),wrtnode)
   NAME:=WRTnode
   ARCH:=ramips
   TBUILD:=openwrt
-  PROFILE:=mt7620n-qmp-small-node
+  PROFILE:=mt7620-qmp-small-node
   IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620n-wrtnode-squashfs-sysupgrade.bin
 endif 
 
@@ -336,7 +336,7 @@ ifeq ($(T),wt3020)
   NAME:=Nexx-WT3020
   ARCH:=ramips
   TBUILD:=openwrt
-  PROFILE:=mt7620a-qmp-tiny-node
+  PROFILE:=mt7620-qmp-tiny-node
   IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620n-wt3020-4M-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620n-wt3020-4M-squashfs-sysupgrade.bin
 endif
@@ -345,7 +345,7 @@ ifeq ($(T),dir-810l)
   NAME:=D-Link-DIR-810L
   ARCH:=ramips
   TBUILD:=openwrt
-  PROFILE:=mt7620a-qmp-small-node
+  PROFILE:=mt7620-qmp-small-node
   IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620a-dir-810l-squashfs-sysupgrade.bin
 endif 
 
