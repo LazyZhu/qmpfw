@@ -22,7 +22,7 @@ OWRT_SCM = git clone git://git.openwrt.org/14.07/openwrt.git
 OWRT_PKG_SCM = git clone -b for-14.07 https://github.com/openwrt/packages.git
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
-QMP_GIT_BRANCH ?= 3.1-rc1
+QMP_GIT_BRANCH ?= master
 BUILD_DIR = build
 CONFIG_DIR = configs
 MY_CONFIGS = $(BUILD_DIR)/configs
@@ -38,11 +38,11 @@ T ?= ar71xx
 MAKE_SRC = -j$(J) V=$(V)
 IMAGEOPT ?= true
 VERSIONOPT ?= true
-VERSION_REPO ?= http://fw.qmp.cat/$(QMP_GIT_BRANCH)_openwrt-%T-generic/packages
 VERSION_DIST ?= qMp
 VERSION_NICK ?= Clearance
 VERSION_CODE ?= Clearance
-VERSION_NUMBER ?= testing
+VERSION_NUMBER ?= 3.1
+VERSION_REPO ?= http://fw.qmp.cat/$(VERSION_NUMBER)_openwrt-%T-generic/packages
 
 include targets.mk
 
