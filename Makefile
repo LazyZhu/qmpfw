@@ -38,12 +38,11 @@ T ?= ar71xx
 MAKE_SRC = -j$(J) V=$(V)
 IMAGEOPT ?= true
 VERSIONOPT ?= true
-#VERSION_REPO ?= http://fw.qmp.cat/$(QMP_GIT_BRANCH)_openwrt-%T-generic/packages
-VERSION_REPO ?= http://fw.qmp.cat/trunk_openwrt-%T-generic/packages
 VERSION_DIST ?= qMp
 VERSION_NICK ?= Kalimotxo
 VERSION_CODE ?= Kalimotxo
 VERSION_NUMBER ?= trunk
+VERSION_REPO ?= http://fw.qmp.cat/$(VERSION_NUMBER)_openwrt-%T-generic/packages
 
 include targets.mk
 
