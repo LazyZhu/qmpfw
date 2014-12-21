@@ -350,8 +350,6 @@ ifeq ($(T),wt1520-8m)
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-8M-squashfs-sysupgrade.bin
 endif
 
-ifeq ($(T),dir-810l)
-  NAME:=D-Link-DIR-810L
 ifeq ($(T),wt3020-4m)
   NAME:=Nexx-WT3020-4M
   ARCH:=ramips
