@@ -1,0 +1,6 @@
+CONFIG_TARGET_ramips=y
+CONFIG_TARGET_ramips_rt305x=y
+CONFIG_PACKAGE_qmp-tiny-node=y
+# CONFIG_PACKAGE_ppp is not set
+# CONFIG_PACKAGE_ppp-mod-pppoa is not set
+# CONFIG_PACKAGE_ppp-mod-pppoe is not set

@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix x86 uap-pro unifi-ap vbox vmware dir-810l wrtnode wt3020-4m wt3020-8m ar71xx-ib atheros-ib mpc85xx-ib ramips-ib x86-ib
+HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix x86 uap-pro unifi-ap vbox vmware dir-810l wrtnode wt1520-4m wt1520-8m wt3020-4m wt3020-8m ar71xx-ib atheros-ib mpc85xx-ib ramips-ib x86-ib
 TBUILD_LIST := openwrt
 
 ifeq ($(T),ar71xx)
@@ -332,6 +332,26 @@ ifeq ($(T),wrtnode)
   IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-wrtnode-squashfs-sysupgrade.bin
 endif 
 
+ifeq ($(T),wt1520-4m)
+  NAME:=Nexx-WT1520-4M
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=rt5350-qmp-tiny-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-4M-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-4M-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),wt1520-8m)
+  NAME:=Nexx-WT1520-8M
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=rt5350-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-8M-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-8M-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),dir-810l)
+  NAME:=D-Link-DIR-810L
 ifeq ($(T),wt3020-4m)
   NAME:=Nexx-WT3020-4M
   ARCH:=ramips
