@@ -81,8 +81,9 @@ endef
 
 define copy_feeds_file
 	$(if $(1),$(eval FEEDS_DIR=$(1)),$(eval FEEDS_DIR=$(TBUILD)))
-	$(if $(FEEDS_DIR),,$(call target_error))	
-	cat $(BUILD_DIR)/qmp/feeds.conf >> $(BUILD_DIR)/$(FEEDS_DIR)
+	$(if $(FEEDS_DIR),,$(call target_error))
+	cp -f $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf.default $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
+        cat $(BUILD_DIR)/qmp/feeds.conf >> $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
 	sed -i -e "s|PATH|`pwd`/$(BUILD_DIR)|" $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
 endef
 
