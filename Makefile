@@ -24,6 +24,7 @@ QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
 QMP_GIT_BRANCH ?= testing
 QMP_CODENAME ?= Kalimotxo
+QMP_RELEASE ?= trunk
 BUILD_DIR = build
 CONFIG_DIR = configs
 MY_CONFIGS = $(BUILD_DIR)/configs
