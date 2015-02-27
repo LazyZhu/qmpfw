@@ -77,14 +77,14 @@ KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
 define build_src
 	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
 	$(eval REV_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git --no-pager log -n 1 --oneline|cut -d " " -f 1))
-	make -C $(BUILD_PATH) $(MAKE_SRC) IMAGEOPT=$(IMAGEOPT) VERSIONOPT=$(VERSIONOPT) VERSION_REPO=$(VERSION_REPO) VERSION_DIST=$(VERSION_DIST) VERSION_NICK=$(VERSION_NICK) VERSION_NUMBER=$(VERSION_NUMBER) VERSION_CODE=$(VERSION_CODE) BRANCH_GIT=$(BRANCH_GIT) REV_GIT=$(REV_GIT)
+	make -C $(BUILD_PATH) $(MAKE_SRC) IMAGEOPT=$(IMAGEOPT) VERSIONOPT=$(VERSIONOPT) VERSION_REPO=$(VERSION_REPO) VERSION_DIST=$(VERSION_DIST) VERSION_NICK=$(VERSION_NICK) VERSION_NUMBER=$(VERSION_NUMBER) VERSION_CODE=$(VERSION_CODE) BRANCH_GIT=$(BRANCH_GIT) REV_GIT=$(REV_GIT) QMP_CODENAME=$(QMP_CODENAME) QMP_RELEASE=$(QMP_RELEASE)
 endef
 
 define copy_feeds_file
 	$(if $(1),$(eval FEEDS_DIR=$(1)),$(eval FEEDS_DIR=$(TBUILD)))
 	$(if $(FEEDS_DIR),,$(call target_error))
 	cp -f $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf.default $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
-        cat $(BUILD_DIR)/qmp/feeds.conf >> $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
+	cat $(BUILD_DIR)/qmp/feeds.conf >> $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
 	sed -i -e "s|PATH|`pwd`/$(BUILD_DIR)|" $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
 endef
 
