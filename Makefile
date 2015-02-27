@@ -22,7 +22,8 @@ OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
 OWRT_PKG_SCM = git clone https://github.com/openwrt/packages.git
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
-QMP_GIT_BRANCH ?= kalimotxo
+QMP_GIT_BRANCH ?= testing
+QMP_CODENAME ?= Kalimotxo
 BUILD_DIR = build
 CONFIG_DIR = configs
 MY_CONFIGS = $(BUILD_DIR)/configs
@@ -81,7 +82,7 @@ endef
 define copy_feeds_file
 	$(if $(1),$(eval FEEDS_DIR=$(1)),$(eval FEEDS_DIR=$(TBUILD)))
 	$(if $(FEEDS_DIR),,$(call target_error))	
-	cp -f $(BUILD_DIR)/qmp/feeds.conf $(BUILD_DIR)/$(FEEDS_DIR)
+	cat $(BUILD_DIR)/qmp/feeds.conf >> $(BUILD_DIR)/$(FEEDS_DIR)
 	sed -i -e "s|PATH|`pwd`/$(BUILD_DIR)|" $(BUILD_DIR)/$(FEEDS_DIR)/feeds.conf
 endef
 
