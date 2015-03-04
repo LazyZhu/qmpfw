@@ -151,8 +151,8 @@ endef
 
 define post_build
 	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
-	$(if $(IM_NAME),,$(eval IM_NAME=$(NAME)-$(COMMUNITY)_$(BRANCH_GIT)-factory-$(TIMESTAMP).bin))
-	$(if $(SIM_NAM),,$(eval SIM_NAME=$(NAME)-$(COMMUNITY)_$(BRANCH_GIT)-sysupgrade-$(TIMESTAMP).bin))
+	$(if $(IM_NAME),,$(eval IM_NAME=$(NAME)-$(COMMUNITY)_$(QMP_RELEASE)-factory-$(TIMESTAMP).bin))
+	$(if $(SIM_NAM),,$(eval SIM_NAME=$(NAME)-$(COMMUNITY)_$(QMP_RELEASE)-sysupgrade-$(TIMESTAMP).bin))
 	$(eval COMP=$(shell ls $(BUILD_PATH)/$(IMAGE_PATH) 2>/dev/null | grep -c \\.gz))
 	mkdir -p $(IMAGES)
 	-@[ $(COMP) -eq 1 ] && gunzip $(BUILD_PATH)/$(IMAGE_PATH) -c > $(IMAGES)/$(IM_NAME)
