@@ -34,8 +34,8 @@ ifeq ($(T),alix)
   ARCH:=x86
   TBUILD:=openwrt
   PROFILE:=x86-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-x86-alix2-combined-squashfs.img
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-alix2-combined-squashfs.img
+  IMAGE:=bin/$(ARCH)/openwrt-x86-geode-combined-squashfs.img
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-geode-combined-squashfs.img
 endif
 
 ifeq ($(T),x86)
