@@ -391,6 +391,7 @@ ifeq ($(T),xiaomi-miwifi-mini)
   TBUILD:=openwrt
   PROFILE:=mt7620-qmp-small-node
   IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-xiaomi-miwifi-mini-squashfs-sysupgrade.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620-xiaomi-miwifi-mini-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),dir-810l)
