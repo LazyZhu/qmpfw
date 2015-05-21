@@ -1,8 +1,8 @@
-# [qMp] firmware generator (http://qmp.cat)
+#    [qMp] firmware generator (http://qmp.cat)
+
+#    Copyright (C) 2011-2015 Routek S.L. (http://routek.net)
 #
-#    Copyright (C) 2011-2012 Routek S.L routek.net
-#
-#    Thiss program is free software: you can redistribute it and/or modify
+#    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
@@ -15,36 +15,43 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Contributors: Pau Escrich <p4u@dabax.net>, Simó Albert i Beltran, Agustí Moll
-
+#    Contributors:
+#       Pau Escrich <p4u@dabax.net>
+#       Simó Albert i Beltran
+#       Agustí Moll
+#       Roger Pueyo Centelles
 
 OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
 OWRT_PKG_SCM = git clone https://github.com/openwrt/packages.git
+
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
 QMP_GIT_BRANCH ?= testing
 QMP_CODENAME ?= Kalimotxo
 QMP_RELEASE ?= trunk
+QMP_FEED = package/feeds/qmp_packages
+
 BUILD_DIR = build
 CONFIG_DIR = configs
 MY_CONFIGS = $(BUILD_DIR)/configs
 IMAGES = images
 SHELL = bash
-QMP_FEED = package/feeds/qmp_packages
 SCRIPTS_DIR= scripts
-COMMUNITY ?= qMp
-EXTRA_PACKS =
+
 J ?= 1
 V ?= 0
 T ?= ar71xx
 MAKE_SRC = -j$(J) V=$(V)
+
 IMAGEOPT ?= true
 VERSIONOPT ?= true
+VERSION_REPO ?= http://fw.qmp.cat/$(VERSION_NUMBER)_openwrt-%T-generic/packages
 VERSION_DIST ?= qMp
 VERSION_NICK ?= Kalimotxo
 VERSION_CODE ?= Kalimotxo
 VERSION_NUMBER ?= trunk
-VERSION_REPO ?= http://fw.qmp.cat/$(VERSION_NUMBER)_openwrt-%T-generic/packages
+COMMUNITY ?= qMp
+EXTRA_PACKS =
 
 include targets.mk
 
