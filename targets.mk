@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 pico2 rocket rs rspro tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix x86 unifi-ap vbox vmware dir-810l wrtnode ar71xx-ib atheros-ib mpc85xx-ib ramips-ib x86-ib
+HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware cf-wr800n dir-810l wrtnode wt1520-4m wt1520-8m wt3020-4m wt3020-8m xiaomi-miwifi-mini ar71xx-ib ath25-ib mpc85xx-ib ramips-ib x86-ib
 TBUILD_LIST := openwrt
 
 ifeq ($(T),ar71xx)
@@ -34,12 +34,21 @@ ifeq ($(T),alix)
   ARCH:=x86
   TBUILD:=openwrt
   PROFILE:=x86-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-x86-alix2-combined-squashfs.img
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-alix2-combined-squashfs.img
+  IMAGE:=bin/$(ARCH)/openwrt-x86-geode-combined-squashfs.img
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-geode-combined-squashfs.img
 endif
 
 ifeq ($(T),x86)
   NAME:=x86
+  ARCH:=x86
+  TBUILD:=openwrt
+  PROFILE:=x86-qmp-big-node
+  IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-squashfs.img
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-squashfs.img
+endif
+
+ifeq ($(T),soekris45xx)
+  NAME:=SoekrisNet45xx
   ARCH:=x86
   TBUILD:=openwrt
   PROFILE:=x86-qmp-big-node
@@ -55,6 +64,15 @@ ifeq ($(T),bullet)
   IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-bullet-m-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-bullet-m-squashfs-sysupgrade.bin
 endif
+
+ifeq ($(T),cf-wr800n)
+  NAME:=Comfast_CF-WR800N
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=mt7620-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-cf-wr800n-squashfs-sysupgrade.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620-cf-wr800n-squashfs-sysupgrade.bin
+endif 
 
 ifeq ($(T),nsm2)
   NAME:=NanoStationM2
@@ -74,13 +92,40 @@ ifeq ($(T),nsm5)
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-nano-m-squashfs-sysupgrade.bin
 endif
 
+ifeq ($(T),nsm5-xw)
+  NAME:=NanoStationM5-XW
+  ARCH:=ar71xx
+  TBUILD:=openwrt
+  PROFILE:=ath-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-nano-m-xw-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-nano-m-xw-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),nslm5-xw)
+  NAME:=NanoStationLocoM5-XW
+  ARCH:=ar71xx
+  TBUILD:=openwrt
+  PROFILE:=ath-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-loco-m-xw-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-loco-m-xw-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),rocket-m-xw)
+  NAME:=RocketM5-XW
+  ARCH:=ar71xx
+  TBUILD:=openwrt
+  PROFILE:=ath-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-rocket-m-xw-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-rocket-m-xw-squashfs-sysupgrade.bin
+endif
+
 ifeq ($(T),pico2)
   NAME:=PicoStation2
-  ARCH:=atheros
+  ARCH:=ath25
   TBUILD:=openwrt
   PROFILE:=at2-qmp-tiny-node
-  BUILD_PATH:=$(BUILD_DIR)/atheros
-  IMAGE:=bin/$(ARCH)/openwrt-atheros-ubnt2-pico2-squashfs.bin
+  BUILD_PATH:=$(BUILD_DIR)/ath25
+  IMAGE:=bin/$(ARCH)/openwrt-ath25-ubnt2-pico2-squashfs.bin
 endif
 
 ifeq ($(T),rocket)
@@ -117,6 +162,15 @@ ifeq ($(T),tl-2543)
   PROFILE:=ath-qmp-small-node
   IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr2543-v1-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr2543-v1-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),mc-mac1200r)
+  NAME:=MERCURY-MAC1200R
+  ARCH:=ar71xx
+  TBUILD:=openwrt
+  PROFILE:=ath-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-mc-mac1200r-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-mc-mac1200r-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wr841n-v7)
@@ -263,12 +317,21 @@ ifeq ($(T),dragino2)
 endif
 
 ifeq ($(T),unifi-ap)
-  NAME:=Ubiquiti-Unifi-AP
+  NAME:=Ubiquiti-UniFi-AP
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
   IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-unifi-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-unifi-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),uap-pro)
+  NAME:=Ubiquiti-UniFi-AP-PRO
+  ARCH:=ar71xx
+  TBUILD:=openwrt
+  PROFILE:=ath-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-uap-pro-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-uap-pro-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),vbox)
@@ -288,20 +351,73 @@ ifeq ($(T),vmware)
   SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.vmdk
 endif
 
-ifeq ($(T),dir-810l)
-  NAME:=D-Link-DIR-810L
+ifeq ($(T),vocore)
+  NAME:=VoCore
   ARCH:=ramips
   TBUILD:=openwrt
-  PROFILE:=mt7620a-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620a-dir-810l-squashfs-sysupgrade.bin
+  PROFILE:=rt5350-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-rt305x-vocore-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),wrtnode)
   NAME:=WRTnode
   ARCH:=ramips
   TBUILD:=openwrt
-  PROFILE:=mt7620n-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620n-wrtnode-squashfs-sysupgrade.bin
+  PROFILE:=mt7620-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-wrtnode-squashfs-sysupgrade.bin
+endif 
+
+ifeq ($(T),wt1520-4m)
+  NAME:=Nexx-WT1520-4M
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=rt5350-qmp-tiny-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-4M-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-4M-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),wt1520-8m)
+  NAME:=Nexx-WT1520-8M
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=rt5350-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-8M-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-8M-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),wt3020-4m)
+  NAME:=Nexx-WT3020-4M
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=mt7620-qmp-tiny-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-wt3020-4M-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620-wt3020-4M-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),wt3020-8m)
+  NAME:=Nexx-WT3020-8M
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=mt7620-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-wt3020-8M-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620-wt3020-8M-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),xiaomi-miwifi-mini)
+  NAME:=Xiaomi-MiWiFi-Mini
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=mt7620-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-xiaomi-miwifi-mini-squashfs-sysupgrade.bin
+  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620-xiaomi-miwifi-mini-squashfs-sysupgrade.bin
+endif 
+
+ifeq ($(T),dir-810l)
+  NAME:=D-Link-DIR-810L
+  ARCH:=ramips
+  TBUILD:=openwrt
+  PROFILE:=mt7620-qmp-small-node
+  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-dir-810l-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),kvm)
@@ -321,11 +437,11 @@ ifeq ($(T),ar71xx-ib)
   IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
 endif
 
-ifeq ($(T),atheros-ib)
-  NAME:=atheros
-  ARCH:=atheros
+ifeq ($(T),ath25-ib)
+  NAME:=ath25
+  ARCH:=ath25
   TBUILD:=openwrt
-  PROFILE:=atheros-imagebuilder
+  PROFILE:=ath25-imagebuilder
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
   IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
 endif

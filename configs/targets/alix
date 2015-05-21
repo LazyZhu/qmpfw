@@ -1,2 +1,7 @@
-CONFIG_TARGET_x86_alix2=y
-CONFIG_TARGET_x86_alix2_Default=y
+CONFIG_TARGET_x86_geode=y
+CONFIG_PACKAGE_kmod-ipip=y
+CONFIG_PACKAGE_kmod-usb-ohci=y
+CONFIG_PACKAGE_kmod-usb-storage=y
+CONFIG_PACKAGE_kmod-usb-uhci=y
+CONFIG_PACKAGE_kmod-usb2=y
+CONFIG_PACKAGE_kmod-rt2800-usb=y

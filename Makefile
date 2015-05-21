@@ -1,8 +1,8 @@
-# [qMp] firmware generator (http://qmp.cat)
+#    [qMp] firmware generator (http://qmp.cat)
+
+#    Copyright (C) 2011-2015 Routek S.L. (http://routek.net)
 #
-#    Copyright (C) 2011-2014 Routek S.L. routek.net
-#
-#    Thiss program is free software: you can redistribute it and/or modify
+#    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
@@ -15,36 +15,44 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Contributors: Pau Escrich <p4u@dabax.net>, Simó Albert i Beltran, Agustí Moll
+#    Contributors:
+#	Pau Escrich <p4u@dabax.net>
+#	Simó Albert i Beltran
+#	Agustí Moll
+#	Roger Pueyo Centelles
 
+OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
+#	OWRT_SCM = git clone git://git.openwrt.org/15.05/openwrt.git
+OWRT_PKG_SCM = git clone -b for-15.05 https://github.com/openwrt/packages.git
 
-OWRT_SCM = git clone git://git.openwrt.org/14.07/openwrt.git
-OWRT_PKG_SCM = git clone -b for-14.07 https://github.com/openwrt/packages.git
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
 QMP_GIT_BRANCH ?= testing
 QMP_CODENAME ?= Clearance
 QMP_RELEASE ?= testing
+QMP_FEED = package/feeds/qmp_packages
+
 BUILD_DIR = build
 CONFIG_DIR = configs
 MY_CONFIGS = $(BUILD_DIR)/configs
 IMAGES = images
 SHELL = bash
-QMP_FEED = package/feeds/qmp_packages
 SCRIPTS_DIR= scripts
-COMMUNITY ?= qMp
-EXTRA_PACKS =
+
 J ?= 1
 V ?= 0
 T ?= ar71xx
 MAKE_SRC = -j$(J) V=$(V)
+
 IMAGEOPT ?= true
 VERSIONOPT ?= true
-VERSION_REPO ?= http://fw.qmp.cat/$(QMP_GIT_BRANCH)_openwrt-%T-generic/packages
+VERSION_REPO ?= http://fw.qmp.cat/$(VERSION_NUMBER)_openwrt-%T-generic/packages
 VERSION_DIST ?= qMp
 VERSION_NICK ?= Clearance
 VERSION_CODE ?= Clearance
-VERSION_NUMBER ?= testing
+VERSION_NUMBER ?= 3.2-rc1
+COMMUNITY ?= qMp
+EXTRA_PACKS =
 
 include targets.mk
 
@@ -151,8 +159,8 @@ endef
 
 define post_build
 	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
-	$(if $(IM_NAME),,$(eval IM_NAME=$(NAME)-$(COMMUNITY)_$(BRANCH_GIT)-factory-$(TIMESTAMP).bin))
-	$(if $(SIM_NAM),,$(eval SIM_NAME=$(NAME)-$(COMMUNITY)_$(BRANCH_GIT)-sysupgrade-$(TIMESTAMP).bin))
+	$(if $(IM_NAME),,$(eval IM_NAME=$(NAME)-$(COMMUNITY)_$(QMP_RELEASE)-factory-$(TIMESTAMP).bin))
+	$(if $(SIM_NAM),,$(eval SIM_NAME=$(NAME)-$(COMMUNITY)_$(QMP_RELEASE)-sysupgrade-$(TIMESTAMP).bin))
 	$(eval COMP=$(shell ls $(BUILD_PATH)/$(IMAGE_PATH) 2>/dev/null | grep -c \\.gz))
 	mkdir -p $(IMAGES)
 	-@[ $(COMP) -eq 1 ] && gunzip $(BUILD_PATH)/$(IMAGE_PATH) -c > $(IMAGES)/$(IM_NAME)
