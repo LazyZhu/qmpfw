@@ -1,5 +1,6 @@
 .checkout*
-dl
-images
-build
 .config
+build
+dl
+files
+images
