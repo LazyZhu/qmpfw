@@ -21,8 +21,8 @@
 #	Agustí Moll
 #	Roger Pueyo Centelles
 
-OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
-#	OWRT_SCM = git clone git://git.openwrt.org/15.05/openwrt.git
+#OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
+OWRT_SCM = git clone git://git.openwrt.org/15.05/openwrt.git
 OWRT_PKG_SCM = git clone -b for-15.05 https://github.com/openwrt/packages.git
 
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
