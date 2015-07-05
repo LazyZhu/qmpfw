@@ -389,7 +389,7 @@ ifeq ($(T),wt3020-4m)
   NAME:=Nexx-WT3020-4M
   ARCH:=ramips
   TBUILD:=openwrt
-  PROFILE:=mt7620-qmp-tiny-node
+  PROFILE:=mt7620_kstrip-qmp-tiny-node
   IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-wt3020-4M-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620-wt3020-4M-squashfs-sysupgrade.bin
 endif
