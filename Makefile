@@ -50,7 +50,7 @@ VERSION_REPO ?= http://fw.qmp.cat/$(VERSION_NUMBER)_openwrt-%T-generic/packages
 VERSION_DIST ?= qMp
 VERSION_NICK ?= Clearance
 VERSION_CODE ?= Clearance
-VERSION_NUMBER ?= 3.2-rc1
+VERSION_NUMBER ?= 3.2-rc2
 COMMUNITY ?= qMp
 EXTRA_PACKS =
 
