@@ -26,7 +26,7 @@ OWRT_PKG_SCM = git clone https://github.com/openwrt/packages.git
 
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
-QMP_GIT_BRANCH ?= testing
+QMP_GIT_BRANCH ?= QinQ
 QMP_CODENAME ?= Kalimotxo
 QMP_RELEASE ?= trunk
 QMP_FEED = package/feeds/qmp_packages
