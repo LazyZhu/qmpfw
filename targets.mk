@@ -57,7 +57,7 @@ ifeq ($(T),soekris45xx)
 endif
 
 ifeq ($(T),bullet)
-  NAME:=Ubiquiti_Bullet_M
+  NAME:=Ubiquiti_Bullet-M
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
@@ -75,7 +75,7 @@ ifeq ($(T),cf-wr800n)
 endif 
 
 ifeq ($(T),nsm2)
-  NAME:=Ubiquiti_NanoStation_M2
+  NAME:=Ubiquiti_NanoStation-M2
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
@@ -84,7 +84,7 @@ ifeq ($(T),nsm2)
 endif
 
 ifeq ($(T),nsm5)
-  NAME:=Ubiquiti_NanoStation_M5
+  NAME:=Ubiquiti_NanoStation-M5
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
@@ -93,7 +93,7 @@ ifeq ($(T),nsm5)
 endif
 
 ifeq ($(T),nsm5-xw)
-  NAME:=Ubiquiti_NanoStation_M5_XW
+  NAME:=Ubiquiti_NanoStation-M5-XW
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
@@ -102,7 +102,7 @@ ifeq ($(T),nsm5-xw)
 endif
 
 ifeq ($(T),nslm5-xw)
-  NAME:=Ubiquiti_NanoStation_Loco_M5_XW
+  NAME:=Ubiquiti_NanoStation-Loco-M5-XW
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
@@ -111,7 +111,7 @@ ifeq ($(T),nslm5-xw)
 endif
 
 ifeq ($(T),rocket-m-xw)
-  NAME:=Ubiquiti_Rocket_M5_XW
+  NAME:=Ubiquiti_Rocket-M5-XW
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
@@ -120,7 +120,7 @@ ifeq ($(T),rocket-m-xw)
 endif
 
 ifeq ($(T),pico2)
-  NAME:=Ubiquiti_PicoStation_2
+  NAME:=Ubiquiti_PicoStation-2
   ARCH:=ath25
   TBUILD:=openwrt
   PROFILE:=at2-qmp-tiny-node
@@ -129,7 +129,7 @@ ifeq ($(T),pico2)
 endif
 
 ifeq ($(T),rocket)
-  NAME:=Ubiquiti_Rocket_M
+  NAME:=Ubiquiti_Rocket-M
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
@@ -147,7 +147,7 @@ ifeq ($(T),rs)
 endif
 
 ifeq ($(T),rspro)
-  NAME:=Ubiquiti_RouterStation_Pro
+  NAME:=Ubiquiti_RouterStation-Pro
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-big-node
@@ -299,7 +299,7 @@ ifeq ($(T),dragino2)
 endif
 
 ifeq ($(T),unifi-ap)
-  NAME:=Ubiquiti_UniFi_AP
+  NAME:=Ubiquiti_UniFi-AP
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
@@ -308,7 +308,7 @@ ifeq ($(T),unifi-ap)
 endif
 
 ifeq ($(T),uap-pro)
-  NAME:=Ubiquiti_UniFi_AP-PRO
+  NAME:=Ubiquiti_UniFi-AP-PRO
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
@@ -334,7 +334,7 @@ ifeq ($(T),vmware)
 endif
 
 ifeq ($(T),vocore)
-  NAME:=VoCore
+  NAME:=Vonger_VoCore
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=rt5350-qmp-small-node
@@ -342,7 +342,7 @@ ifeq ($(T),vocore)
 endif 
 
 ifeq ($(T),wrtnode)
-  NAME:=WRTnode
+  NAME:=WRTnode_WRTnode
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=mt7620-qmp-small-node
