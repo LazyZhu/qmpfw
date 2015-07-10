@@ -57,7 +57,7 @@ EXTRA_PACKS =
 include targets.mk
 
 PROFILE ?= ath-qmp-tiny-node
-TIMESTAMP = $(shell date +%Y%m%d_%H%M)
+TIMESTAMP = $(shell date +%Y%m%d-%H%M)
 
 #Checking if developer mode is enabled and if target is defined before
 $(eval $(if $(DEV),QMP_GIT=$(QMP_GIT_RW),QMP_GIT=$(QMP_GIT_RO)))
