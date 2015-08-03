@@ -48,9 +48,9 @@ IMAGEOPT ?= true
 VERSIONOPT ?= true
 VERSION_REPO ?= http://fw.qmp.cat/$(VERSION_NUMBER)_openwrt-%T-generic/packages
 VERSION_DIST ?= qMp
-VERSION_NICK ?= Clearance
-VERSION_CODE ?= Clearance
-VERSION_NUMBER ?= 3.2-rc3
+VERSION_NICK ?= Kalimotxo
+VERSION_CODE ?= Kalimotxo
+VERSION_NUMBER ?= trunk
 COMMUNITY ?= qMp
 EXTRA_PACKS =
 
