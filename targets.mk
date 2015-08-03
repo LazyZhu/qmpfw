@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-mr3040-cam tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore wt1520-4m wt1520-8m cf-wr800n dir-810l wrtnode wt3020-4m wt3020-8m xiaomi-miwifi-mini ar71xx-ib ath25-ib mpc85xx-ib ramips-ib x86-ib
+HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore wt1520-4m wt1520-8m cf-wr800n dir-810l wrtnode wt3020-4m wt3020-8m xiaomi-miwifi-mini ar71xx-ib ath25-ib mpc85xx-ib ramips-ib x86-ib
 TBUILD_LIST := openwrt
 
 ifeq ($(T),ar71xx)
