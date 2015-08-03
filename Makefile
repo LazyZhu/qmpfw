@@ -16,13 +16,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #    Contributors:
-#       Pau Escrich <p4u@dabax.net>
-#       Simó Albert i Beltran
-#       Agustí Moll
-#       Roger Pueyo Centelles
+#	Pau Escrich <p4u@dabax.net>
+#	Simó Albert i Beltran
+#	Agustí Moll
+#	Roger Pueyo Centelles
 
-OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
-OWRT_PKG_SCM = git clone https://github.com/openwrt/packages.git
+#OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
+OWRT_SCM = git clone git://git.openwrt.org/15.05/openwrt.git
+OWRT_PKG_SCM = git clone -b for-15.05 https://github.com/openwrt/packages.git
 
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
@@ -47,16 +48,16 @@ IMAGEOPT ?= true
 VERSIONOPT ?= true
 VERSION_REPO ?= http://fw.qmp.cat/$(VERSION_NUMBER)_openwrt-%T-generic/packages
 VERSION_DIST ?= qMp
-VERSION_NICK ?= Kalimotxo
-VERSION_CODE ?= Kalimotxo
-VERSION_NUMBER ?= trunk
+VERSION_NICK ?= Clearance
+VERSION_CODE ?= Clearance
+VERSION_NUMBER ?= 3.2-rc3
 COMMUNITY ?= qMp
 EXTRA_PACKS =
 
 include targets.mk
 
 PROFILE ?= ath-qmp-tiny-node
-TIMESTAMP = $(shell date +%Y%m%d_%H%M)
+TIMESTAMP = $(shell date +%Y%m%d-%H%M)
 
 #Checking if developer mode is enabled and if target is defined before
 $(eval $(if $(DEV),QMP_GIT=$(QMP_GIT_RW),QMP_GIT=$(QMP_GIT_RO)))
@@ -158,8 +159,8 @@ endef
 
 define post_build
 	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
-	$(if $(IM_NAME),,$(eval IM_NAME=$(NAME)-$(COMMUNITY)_$(QMP_RELEASE)-factory-$(TIMESTAMP).bin))
-	$(if $(SIM_NAM),,$(eval SIM_NAME=$(NAME)-$(COMMUNITY)_$(QMP_RELEASE)-sysupgrade-$(TIMESTAMP).bin))
+	$(if $(IM_NAME),,$(eval IM_NAME=$(COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_factory_$(TIMESTAMP).bin))
+	$(if $(SIM_NAM),,$(eval SIM_NAME=$(COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_sysupgrade_$(TIMESTAMP).bin))
 	$(eval COMP=$(shell ls $(BUILD_PATH)/$(IMAGE_PATH) 2>/dev/null | grep -c \\.gz))
 	mkdir -p $(IMAGES)
 	-@[ $(COMP) -eq 1 ] && gunzip $(BUILD_PATH)/$(IMAGE_PATH) -c > $(IMAGES)/$(IM_NAME)
