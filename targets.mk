@@ -177,7 +177,7 @@ ifeq ($(T),tl-wr841n-v7)
   NAME:=TP-Link_TL-WR841N-v7
   ARCH:=ar71xx
   TBUILD:=openwrt
-  PROFILE:=ath-qmp-tiny-node
+  PROFILE:=ar71xx_kstrip-qmp-tiny-node
   IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841nd-v7-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841nd-v7-squashfs-sysupgrade.bin
 endif
@@ -186,7 +186,7 @@ ifeq ($(T),tl-wr841n-v8)
   NAME:=TP-Link_TL-WR841N-v8
   ARCH:=ar71xx
   TBUILD:=openwrt
-  PROFILE:=ath-qmp-tiny-node
+  PROFILE:=ar71xx_kstrip-qmp-tiny-node
   IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-sysupgrade.bin
 endif
@@ -195,7 +195,7 @@ ifeq ($(T),tl-wr841n-v9)
   NAME:=TP-Link_TL-WR841N-v9
   ARCH:=ar71xx
   TBUILD:=openwrt
-  PROFILE:=ath-qmp-tiny-node
+  PROFILE:=ar71xx_kstrip-qmp-tiny-node
   IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v9-squashfs-factory.bin
   SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v9-squashfs-sysupgrade.bin
 endif
